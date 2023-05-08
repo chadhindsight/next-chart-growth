@@ -1,5 +1,4 @@
 "use client"
-import Image from 'next/image'
 import styles from './page.module.css'
 import { Line } from 'react-chartjs-2';
 import {
@@ -41,6 +40,7 @@ export default function Home() {
 
     return totalViewsArr;
   }
+
   const options = {
     plugins: {
       legend: {
@@ -82,6 +82,13 @@ export default function Home() {
         }
       }
     }
+  }
+
+  const defaultData = {
+    labels: [...Array(100).keys()],
+    datasets: [
+      { data: generateYoutubeGrowthData(10, 105) }
+    ]
   }
 
   return (
