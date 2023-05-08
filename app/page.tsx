@@ -1,5 +1,30 @@
+"use client"
 import Image from 'next/image'
 import styles from './page.module.css'
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+} from "chart.js"
+
+// Chart Js stuff
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+)
 
 export default function Home() {
 
@@ -16,10 +41,52 @@ export default function Home() {
 
     return totalViewsArr;
   }
+  const options = {
+    plugins: {
+      legend: {
+        display: false
+      },
+      title: {
+        display: true,
+        text: "Youtube Growth Over Time with Daily Uploads",
+        color: "white",
+        font: {
+          size: 18
+        }
+      }
+    },
+    elements: {
+      line: {
+        tension: 0,
+        borderWidth: 1,
+        borderColor: "lightblue",
+        fill: "start",
+        backgroundColor: "lightblue"
+      },
+      point: {
+        radius: 10,
+        hitRadius: 10
+      }
+    },
+    scales: {
+      x: {
+        display: true,
+        ticks: {
+          color: "white"
+        }
+      },
+      y: {
+        display: true,
+        ticks: {
+          color: "white"
+        }
+      }
+    }
+  }
 
   return (
     <main className={styles.main}>
-
+      <Line data={defaultData} width={100} height={40} options={options}></Line>
     </main>
   )
 }
