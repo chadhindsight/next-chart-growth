@@ -12,6 +12,7 @@ import {
   Legend,
   Filler
 } from "chart.js"
+import { useRef } from 'react';
 
 // Chart Js stuff
 ChartJS.register(
@@ -26,6 +27,9 @@ ChartJS.register(
 )
 
 export default function Home() {
+
+  // reference a specific el in our react DOM
+  const lineChart = useRef(null)
 
   function generateYoutubeGrowthData(viewsPerDay: number, totalDays: number) {
 
@@ -93,7 +97,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Line data={defaultData} width={100} height={40} options={options}></Line>
+      <Line data={defaultData} width={100} height={40} options={options} ref={lineChart}></Line>
     </main>
   )
 }
