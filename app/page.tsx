@@ -7,6 +7,14 @@ export default function Home() {
 
     // return an array of the views per day
     const totalViewsArr = [viewsPerDay]
+
+    for (let i = 1; i < totalDays; i++) {
+      let videoCount = i + 1
+      let totalViews = totalViewsArr[i - 1] + (videoCount * viewsPerDay); // 10 + 20
+      totalViewsArr.push(totalViews)
+    }
+
+    return totalViewsArr;
   }
 
   return (
