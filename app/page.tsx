@@ -12,7 +12,7 @@ import {
   Legend,
   Filler
 } from "chart.js"
-import { useRef } from 'react';
+import { MutableRefObject, useRef } from 'react';
 
 // Chart Js stuff
 ChartJS.register(
@@ -93,6 +93,27 @@ export default function Home() {
     datasets: [
       { data: generateYoutubeGrowthData(10, 105) }
     ]
+  }
+
+  function renderChart() {
+    const chart = lineChart.current
+    const totalDays = (document.getElementById("total-days") as HTMLInputElement).value
+    const viewsPerDay = (document.getElementById("views-per-day") as HTMLInputElement).value
+
+    // parse the string values
+    let parsedDays = parseInt(totalDays)
+    let parsedViews = parseInt(viewsPerDay)
+
+    if (chart !== null) {
+
+      chart.data = {
+        labels: [...Array(100).keys()],
+        datasets: [
+          { data: generateYoutubeGrowthData(10, 105) }
+        ]
+      }
+      chart.update()
+    }
   }
 
   return (
